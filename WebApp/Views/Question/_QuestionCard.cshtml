@@ -1,0 +1,16 @@
+﻿@model Question
+
+<div class="col-sm-12 col-md-4 my-2">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h4 class="card-title">@Model.QuestionText</h4>
+            <select class="selectpicker show-tick">
+                <option value="1">@Model.OptionA</option>
+                <option value="2">@Model.OptionB</option>
+                <option value="3">@Model.OptionC</option>
+                <option value="4">@Model.OptionD</option>
+                <option value="5">@Model.OptionE</option>
+            </select>
+        </div>
+    </div>
+</div>

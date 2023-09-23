@@ -1,0 +1,51 @@
+﻿@model List<Question>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Sorular
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Yeni Soru Oluştur
+            </a>
+        </div>
+    </div>
+
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Soru</th>
+                <th>Seçenek A</th>
+                <th>Seçenek B</th>
+                <th>Seçenek C</th>
+                <th>Seçenek D</th>
+                <th>Seçenek E</th>
+                <th>Doğru Seçenek</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>@obj.QuestionID</td>
+                    <td>@obj.QuestionText</td>
+                    <td>@obj.OptionA</td>
+                    <td>@obj.OptionB</td>
+                    <td>@obj.OptionC</td>
+                    <td>@obj.OptionD</td>
+                    <td>@obj.OptionE</td>
+                    <td>@obj.CorrectAnswer</td>
+                    <td></td
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
