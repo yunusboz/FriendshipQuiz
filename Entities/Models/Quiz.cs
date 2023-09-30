@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,15 +10,28 @@ namespace Entities.Models
 {
     public class Quiz
     {
-        public int QuizID { get; set; }
+        public Guid QuizID { get; set; }
+
+        [Required]
+        [MinLength(3)]
+        [MaxLength(30)]
+        [DisplayName("Quiz Adı")]
         public string Name { get; set; }
+
+        [Required]
+        [DisplayName("İsim")]
         public string CreatedBy { get; set; } = "Anonim";
         public DateTime CreatedDate { get; set; }
+        public int VisitLimit { get; set; } = 5;
+        [DisplayName("Sorular")]
         public ICollection<Question> Questions { get; set; }
+        public ICollection<QuizResult> QuizResults { get; set; }
 
         public Quiz()
         {
+            QuizID = Guid.NewGuid();
             Questions = new HashSet<Question>();
+            QuizResults = new HashSet<QuizResult>();
             CreatedDate = DateTime.Now;
         }
     }

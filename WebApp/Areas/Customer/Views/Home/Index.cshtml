@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Arkadaşlık Anketine hoşgeldiniz</h2>
+    <h5>Arkadaşınızın sizi ne kadar tanıdığını anket oluşturarak öğrenebilirsiniz!</h5>
+    <div class="card border-info mb-3 mt-3">
+        <div class="card-header">Anket Oluştur</div>
+        <div class="card-body">
+            <form method="get">
+                <h4 class="card-title">Üye Olmadan Anket Oluştur</h4>
+                <div class="input-group mb-3">
+                    <input name="name" type="text" class="form-control" placeholder="Adınız" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button asp-area="Customer" asp-controller="Quiz" asp-action="Create" class="btn btn-primary" type="submit" id="button-addon2">Anket Oluştur</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

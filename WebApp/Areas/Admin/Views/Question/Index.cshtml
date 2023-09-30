@@ -1,0 +1,44 @@
+﻿@model List<Question>
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Sorular</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+        <form method="post" asp-action="GetResult">
+            <div class="container overflow-hidden text-center">
+                <div class="row g-lg-5">
+                    <div class="text-center">
+                        <div class="col-6">
+                            @foreach (Question question in Model)
+                            {
+                                <div class="col-sm-12 col-md-4 my-2">
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h4 class="card-title">@question.QuestionText</h4>
+                                            <select class="selectpicker show-tick">
+                                                <option value="1">@question.OptionA</option>
+                                                <option value="2">@question.OptionB</option>
+                                                <option value="3">@question.OptionC</option>
+                                                <option value="4">@question.OptionD</option>
+                                                <option value="5">@question.OptionE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
