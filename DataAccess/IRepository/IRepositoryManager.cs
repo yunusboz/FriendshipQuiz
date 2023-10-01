@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.IRepository
 {
-    public interface IUnitOfWork
+    public interface IRepositoryManager
     {
         IQuizRepository Quiz { get; }
         IQuestionRepository Question { get; }

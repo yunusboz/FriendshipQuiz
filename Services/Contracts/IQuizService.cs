@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.IRepository
+namespace Services.Contracts
 {
-    public interface IQuizRepository : IRepository<Quiz>
+    public interface IQuizService
     {
-        IQueryable<Quiz> GetAllQuizzes(bool trackChanges, string includeProperties = "");
+        IEnumerable<Quiz> GetAllQuiz(bool trackChanges, string includeProperties = "");
         Quiz? GetOneQuiz(Guid id, bool trackChanges, string includeProperties = "");
         void CreateOneQuiz(Quiz quiz);
-        void DeleteOneQuiz(Quiz quiz);
         void UpdateOneQuiz(Quiz quiz);
+        void DeleteOneQuiz(Guid id);
     }
 }

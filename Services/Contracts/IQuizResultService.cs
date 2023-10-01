@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.IRepository
+namespace Services.Contracts
 {
-    public interface IQuizResultRepository : IRepository<QuizResult>
+    public interface IQuizResultService
     {
-        IQueryable<QuizResult> GetAllQuizResults(bool trackChanges, string includeProperties = "");
+        IEnumerable<QuizResult> GetAllQuizResults(bool trackChanges, string includeProperties = "");
         QuizResult? GetOneQuizResult(int id, bool trackChanges, string includeProperties = "");
         void CreateOneQuizResult(QuizResult quizResult);
     }

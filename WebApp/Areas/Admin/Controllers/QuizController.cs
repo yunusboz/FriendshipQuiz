@@ -14,9 +14,9 @@ namespace WebApp.Areas.Admin.Controllers
     [Authorize(Roles = Roles.Admin)]
     public class QuizController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRepositoryManager _unitOfWork;
 
-        public QuizController(IUnitOfWork unitOfWork)
+        public QuizController(IRepositoryManager unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

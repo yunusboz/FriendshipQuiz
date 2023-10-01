@@ -13,9 +13,9 @@ namespace WebApp.Areas.Admin.Controllers
     [Authorize(Roles = Roles.Admin)]
     public class QuestionController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRepositoryManager _unitOfWork;
 
-        public QuestionController(IUnitOfWork unitOfWork)
+        public QuestionController(IRepositoryManager unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

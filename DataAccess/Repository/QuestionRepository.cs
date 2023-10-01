@@ -12,20 +12,22 @@ namespace DataAccess.Repository
 {
     public class QuestionRepository : Repository<Question>, IQuestionRepository
     {
-        private BaseDbContext _dbContext;
         public QuestionRepository(BaseDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
         }
 
-        public IEnumerable<Question> GetQuestionsById(Expression<Func<Question, bool>> expression)
+        public void CreateOneQuestion(Question question) => Add(question);
+
+        public void DeleteOneQuestion(Question question) => Remove(question);
+
+        public IQueryable<Question> GetAllQuestions(bool trackChanges, string includeProperties = "") 
+            => GetAll(trackChanges, includeProperties);
+
+        public Question? GetOneQuestion(int id, bool trackChanges, string includeProperties = "")
         {
-            return _dbContext.Questions.Where(expression);
+            return Get(q => q.QuestionID.Equals(id), trackChanges, includeProperties);
         }
 
-        public void Update(Question question)
-        {
-            _dbContext.Questions.Update(question);
-        }
+        public void UpdateOneQuestion(Question question) => Update(question);
     }
 }

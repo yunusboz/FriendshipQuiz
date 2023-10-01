@@ -2,18 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.IRepository
+namespace Services.Contracts
 {
-    public interface IQuestionRepository : IRepository<Question>
+    public interface IQuestionService
     {
-        IQueryable<Question> GetAllQuestions(bool trackChanges, string includeProperties = "");
+        IEnumerable<Question> GetAllQuestions(bool trackChanges, string includeProperties = "");
         Question? GetOneQuestion(int id, bool trackChanges, string includeProperties = "");
         void CreateOneQuestion(Question question);
-        void DeleteOneQuestion(Question question);
         void UpdateOneQuestion(Question question);
+        void DeleteOneQuestion(int id);
     }
 }

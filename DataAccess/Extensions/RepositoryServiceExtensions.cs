@@ -17,7 +17,10 @@ namespace DataAccess.Extensions
         public static IServiceCollection AddRepositoryServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
+            services.AddScoped<IQuizRepository, QuizRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IQuizResultRepository, QuizResultRepository>();
             return services;
         }
     }

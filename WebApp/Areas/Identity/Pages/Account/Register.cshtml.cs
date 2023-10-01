@@ -78,19 +78,11 @@ namespace WebApp.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
-            [Display(Name = "Ad")]
-            [StringLength(30, ErrorMessage = "{0} en az {2} karakter en fazla {1} karakter içerebilir.",MinimumLength = 3 )]
-            public string FirstName { get; set; }
-            [Required]
-            [Display(Name = "Soyad")]
-            [StringLength(30, ErrorMessage = "{0} en az {2} karakter en fazla {1} karakter içerebilir.", MinimumLength = 2)]
-            public string LastName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "{0} alanı zorunlu.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -99,10 +91,10 @@ namespace WebApp.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 8)]
+            [Required(ErrorMessage = "{0} alanı zorunlu.")]
+            [StringLength(100, ErrorMessage = "{0} en az {2} karakter ve en fazla {1} karakter uzunluğunda olabilir", MinimumLength = 8)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Şifre")]
             public string Password { get; set; }
 
             /// <summary>
@@ -110,13 +102,22 @@ namespace WebApp.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Şifre tekrar")]
+            [Compare("Password", ErrorMessage = "Şifreler eşleşmiyor.")]
             public string ConfirmPassword { get; set; }
 
             public string? Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
+
+            [Required(ErrorMessage = "{0} alanı zorunlu.")]
+            [Display(Name = "Ad")]
+            [StringLength(30, ErrorMessage = "{0} en az {2} karakter ve en fazla {1} karakter uzunluğunda olabilir.", MinimumLength = 3)]
+            public string FirstName { get; set; }
+            [Required(ErrorMessage = "{0} alanı zorunlu.")]
+            [Display(Name = "Soyad")]
+            [StringLength(30, ErrorMessage = "{0} en az {2} karakter ve en fazla {1} karakter uzunluğunda olabilir.", MinimumLength = 2)]
+            public string LastName { get; set; }
         }
 
 
@@ -151,6 +152,8 @@ namespace WebApp.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

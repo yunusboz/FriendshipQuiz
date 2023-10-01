@@ -11,15 +11,18 @@ namespace DataAccess.Repository
 {
     public class QuizResultRepository : Repository<QuizResult>, IQuizResultRepository
     {
-        private BaseDbContext _context;
         public QuizResultRepository(BaseDbContext dbContext) : base(dbContext)
         {
-            dbContext = _context;
         }
 
-        public void Update(QuizResult quizResult)
+        public void CreateOneQuizResult(QuizResult quizResult) => Add(quizResult);
+
+        public IQueryable<QuizResult> GetAllQuizResults(bool trackChanges, string includeProperties = "") 
+            => GetAll(trackChanges, includeProperties);
+
+        public QuizResult? GetOneQuizResult(int id, bool trackChanges, string includeProperties = "")
         {
-            _context.QuizResults.Update(quizResult);
+            return Get(q => q.Id.Equals(id),trackChanges,includeProperties);
         }
     }
 }

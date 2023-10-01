@@ -11,9 +11,9 @@ namespace WebApp.Areas.Customer.Controllers
     [Area("Customer")]
     public class QuizController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRepositoryManager _unitOfWork;
 
-        public QuizController(IUnitOfWork unitOfWork)
+        public QuizController(IRepositoryManager unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

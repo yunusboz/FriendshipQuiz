@@ -1,6 +1,7 @@
 using DataAccess.Extensions;
 using DataAccess.IRepository;
 using DataAccess.Repository;
+using Services.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Contexts;
@@ -16,6 +17,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddRepositoryServices(builder.Configuration);
 builder.Services.AddWebAppServices();
+builder.Services.AddServiceServices();
 
 var app = builder.Build();
 

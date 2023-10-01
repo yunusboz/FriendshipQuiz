@@ -12,46 +12,56 @@ namespace DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly BaseDbContext _dbContext;
-        internal DbSet<T> dbSet;
+        protected readonly BaseDbContext _dbContext;
 
         public Repository(BaseDbContext dbContext)
         {
             _dbContext = dbContext;
-            dbSet = _dbContext.Set<T>();
         }
 
         public void Add(T entity)
         {
-            dbSet.Add(entity);
+            _dbContext.Set<T>().Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> predicate, string includeProperties = "")
+        public T Get(Expression<Func<T, bool>> predicate,bool trackChanges ,string includeProperties = "")
         {
-            IQueryable<T> query = dbSet;
-            query = query.Where(predicate);
+            var entity = _dbContext.Set<T>();
+            entity.Where(predicate);
             foreach(var item in includeProperties.Split(new char[] {',' }, StringSplitOptions.RemoveEmptyEntries)) 
             {
-                query = query.Include(item);
+                entity.Include(item);
             }
-            return query.FirstOrDefault();
-            //return dbSet.Where(predicate).FirstOrDefault();
+            return trackChanges
+            ? entity.SingleOrDefault()
+            : entity.AsNoTracking().SingleOrDefault();
         }
 
-        public IQueryable<T> GetAll()
+        public IQueryable<T> GetAll(bool trackChanges, string includeProperties = "")
         {
-            IQueryable<T> query = dbSet;
-            return query;
+            var entities = _dbContext.Set<T>();
+            foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                entities.Include(item);
+            }
+            return trackChanges
+            ? entities
+            : entities.AsNoTracking();
         }
 
         public void Remove(T entity)
         {
-            dbSet.Remove(entity);
+            _dbContext.Set<T>().Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entities)
         {
-            dbSet.RemoveRange(entities);
+            _dbContext.Set<T>().RemoveRange(entities); 
+        }
+
+        public void Update(T entity)
+        {
+            _dbContext.Set<T>().Update(entity);
         }
     }
 }

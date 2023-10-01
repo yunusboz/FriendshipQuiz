@@ -19,7 +19,7 @@
                     <h3 class="border-bottom pb-3 mb-4 text-secondary text-center">Yeni bir hesap oluştur.</h3>
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                     <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="Adınız" />
+                        <input asp-for="Input.FirstName" class="form-control" placeholder="Adınız" />
                         <label asp-for="Input.FirstName" class="ms-2 text-muted">Ad</label>
                         <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                     </div>
@@ -34,13 +34,13 @@
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                     <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.Password" class="ms-2 text-muted">Password</label>
+                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Şifre" />
+                        <label asp-for="Input.Password" class="ms-2 text-muted">Şifre</label>
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
                     <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Confirm Password</label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Tekrar Şifre" />
+                        <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Şifre Tekrar</label>
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
                     <div class="form-floating mb-3 col-md-6">
