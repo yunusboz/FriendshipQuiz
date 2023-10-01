@@ -5,10 +5,13 @@ using DataAccess.Contexts;
 using DataAccess.IRepository;
 using Entities.ViewModels;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Authorization;
+using Utility.Constants;
 
 namespace WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = Roles.Admin)]
     public class QuizController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

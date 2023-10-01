@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Contexts;
 using DataAccess.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using Utility.Constants;
 
 namespace WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = Roles.Admin)]
     public class QuestionController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

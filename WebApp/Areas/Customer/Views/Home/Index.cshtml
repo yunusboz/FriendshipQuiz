@@ -2,19 +2,36 @@
     ViewData["Title"] = "Ana Sayfa";
 }
 
-<div class="text-center">
-    <h2 class="display-4">Arkadaşlık Anketine hoşgeldiniz</h2>
-    <h5>Arkadaşınızın sizi ne kadar tanıdığını anket oluşturarak öğrenebilirsiniz!</h5>
-    <div class="card border-info mb-3 mt-3">
-        <div class="card-header">Anket Oluştur</div>
-        <div class="card-body">
-            <form method="get">
-                <h4 class="card-title">Üye Olmadan Anket Oluştur</h4>
-                <div class="input-group mb-3">
-                    <input name="name" type="text" class="form-control" placeholder="Adınız" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button asp-area="Customer" asp-controller="Quiz" asp-action="Create" class="btn btn-primary" type="submit" id="button-addon2">Anket Oluştur</button>
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-primary bg-gradient m-lg-0 py-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="py-2 text-white">Arkadaşlık Anketine hoşgeldiniz</h2>
+                <h4 class="py-2 text-white">Arkadaşınızın sizi ne kadar tanıdığını anket oluşturarak öğrenebilirsiniz!</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <form method="get" class="row">
+                    <div class="form-floating input-group mb-3 col-md-6">
+                        <input name="name" type="text" class="form-control" aria-required="true" placeholder="Adınız" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                        <label class="ms-2 text-muted">Adınız</label>
+                        <button asp-area="Customer" asp-controller="Quiz" asp-action="Create" class="btn btn-primary" type="submit" id="button-addon2">Anket Oluştur</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-12">
+                <p class="divider-text d-flex pt-2">Ya da</p>
+                <p class="text-center text-bg-info border">
+                    Üye olarak ankete istediğiniz kadar soru ekleyebilir ve oluşturduğunuz anketi istediğiniz kadar arkadaşınıza gönderebilirsiniz
+                </p>
+                <div class="w-75 btn-group" role="group">
+                        <a class="btn btn-primary mx-2" id="register" asp-area="Identity" asp-page="/Account/Register">Üye Ol</a>
+                        <a class="btn btn-info mx-2" id="login" asp-area="Identity" asp-page="/Account/Login">Giriş Yap</a>               
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

@@ -1,5 +1,7 @@
 ﻿using DataAccess.Contexts;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Utility;
 
 namespace WebApp.Extensions
 {
@@ -14,7 +16,16 @@ namespace WebApp.Extensions
                 options.Password.RequireLowercase = true;
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
-            }).AddEntityFrameworkStores<BaseDbContext>();
+            }).AddEntityFrameworkStores<BaseDbContext>().AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+            services.AddScoped<IEmailSender, EmailSender>();
 
             return services;
         }
