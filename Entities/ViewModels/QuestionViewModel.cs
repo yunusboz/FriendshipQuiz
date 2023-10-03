@@ -11,7 +11,6 @@ namespace Entities.ViewModels
 {
     public class QuestionViewModel
     {
-        public int QuestionID { get; set; }
 
         [Required]
         [DisplayName("Soru")]
@@ -41,7 +40,6 @@ namespace Entities.ViewModels
 
         public QuestionViewModel(Question entity)
         {
-            QuestionID = entity.QuestionID;
             QuestionText = entity.QuestionText;
             OptionA = entity.OptionA;
             OptionB = entity.OptionB;

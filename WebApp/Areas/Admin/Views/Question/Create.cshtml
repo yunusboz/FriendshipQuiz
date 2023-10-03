@@ -4,64 +4,66 @@
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="py-2">Soruları Oluştur</h2>
+                <h2 class="py-2 text-white">Soru Oluştur</h2>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
-        <form method="post">
-            @*<input asp-for="@Model.QuizID = TempData["quizId"]" hidden />*@
-            <div class="border p-3">
-                
-                @*<div asp-validation-summary="ModelOnly"></div>*@
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="QuestionText" class="form-control border-0 shadow" />
-                    <label asp-for="QuestionText" class="ms-2"></label>
-                    @*<span asp-validation-for="Name" class="text-danger"></span>*@
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="OptionA" class="form-control border-0 shadow" />
-                    <label asp-for="OptionA" class="ms-2"></label>
-                    @*<span asp-validation-for="Name" class="text-danger"></span>*@
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="OptionB" class="form-control border-0 shadow" />
-                    <label asp-for="OptionB" class="ms-2"></label>
-                    @*<span asp-validation-for="Name" class="text-danger"></span>*@
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="OptionC" class="form-control border-0 shadow" />
-                    <label asp-for="OptionC" class="ms-2"></label>
-                    @*<span asp-validation-for="Name" class="text-danger"></span>*@
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="OptionD" class="form-control border-0 shadow" />
-                    <label asp-for="OptionD" class="ms-2"></label>
-                    @*<span asp-validation-for="Name" class="text-danger"></span>*@
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="OptionE" class="form-control border-0 shadow" />
-                    <label asp-for="OptionE" class="ms-2"></label>
-                    @*<span asp-validation-for="Name" class="text-danger"></span>*@
-                </div>
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="CorrectAnswer" class="form-control border-0 shadow" />
-                    <label asp-for="CorrectAnswer" class="ms-2"></label>
-                    @*<span asp-validation-for="Name" class="text-danger"></span>*@
-                </div>
+        <div class="row">
+            <div class="col-md-12">
+                <section>
+                    <form method="post">
+                        <div class="border p-3">
+                            <input asp-for="QuizID" hidden />
+                            @*<div asp-validation-summary="ModelOnly"></div>*@
+                            <div class="form-floating mb-3">
+                                <input asp-for="QuestionText" class="form-control" />
+                                <label asp-for="QuestionText" class="form-label"></label>
+                                <span asp-validation-for="QuestionText" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="OptionA" class="form-control" />
+                                <label asp-for="OptionA" class="form-label"></label>
+                                <span asp-validation-for="OptionA" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="OptionB" class="form-control" />
+                                <label asp-for="OptionB" class="form-label"></label>
+                                <span asp-validation-for="OptionB" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="OptionC" class="form-control" />
+                                <label asp-for="OptionC" class="form-label"></label>
+                                <span asp-validation-for="OptionC" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="OptionD" class="form-control" />
+                                <label asp-for="OptionD" class="form-label"></label>
+                                <span asp-validation-for="OptionD" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="OptionE" class="form-control" />
+                                <label asp-for="OptionE" class="form-label"></label>
+                                <span asp-validation-for="OptionE" class="text-danger"></span>
+                            </div>
 
-                <div class="row pt-2">
-                    <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-primary form-control">Quiz Oluştur</button>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <a asp-controller="Quiz" asp-action="Index" class="btn btn-outline-primary border form-control">
-                            Quizler
-                        </a>
-                    </div>
-                </div>
+                            <div class="d-flex justify-content-between pt-2">
+                                <div class="col-6 col-md-3">
+                                    <button type="submit" class="btn btn-primary form-control">Soru Ekle</button>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <a asp-controller="Quiz" asp-action="Index" class="btn btn-outline-primary border form-control">
+                                        Quizler
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
             </div>
-        </form>
+        </div>
+        
+       
     </div>
 </div>
 

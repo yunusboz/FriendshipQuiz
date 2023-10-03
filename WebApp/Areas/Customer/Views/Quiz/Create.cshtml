@@ -4,49 +4,78 @@
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="py-2">Quiz Oluştur</h2>
+                <h2 class="py-2">Anket Oluştur</h2>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
         <form method="post">
             <div class="border p-3">
+                <div asp-validation-summary="All" class="text-danger" role="alert"></div>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="@Model.CreatedBy" class="form-control border-0 shadow" />
-                    <label asp-for="@Model.CreatedBy" class="ms-2"></label>
+                    <input asp-for="CreatedBy" class="form-control border-0 shadow" />
+                    <label asp-for="CreatedBy" class="ms-2"></label>
+                    <span asp-validation-for="CreatedBy" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="@Model.Name" class="form-control border-0 shadow" />
-                    <label asp-for="@Model.Name" class="ms-2"></label>
-                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                    <input asp-for="Name" class="form-control border-0 shadow" />
+                    <label asp-for="Name" class="ms-2"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
-                @for(var i = 0; i < Model.Questions.Count(); i++)
-                {
-                    <div class="form-floating py-2 col-12">
-                        <input type="hidden" asp-for="@Model.Questions[i].OptionA" />
-                        <input type="hidden" asp-for="@Model.Questions[i].OptionB" />
-                        <input type="hidden" asp-for="@Model.Questions[i].OptionC" />
-                        <input type="hidden" asp-for="@Model.Questions[i].OptionD" />
-                        <input type="hidden" asp-for="@Model.Questions[i].OptionE" />
-                        <input type="hidden" asp-for="@Model.Questions[i].QuestionText" />
-
-                        <label>@Model.Questions[i].QuestionText</label>
-                        <select asp-for="@Model.Questions[i].CorrectAnswer" class="form-control">
-                            <option value="1">@Model.Questions[i].OptionA</option>  
-                            <option value="2">@Model.Questions[i].OptionB</option>
-                            <option value="3">@Model.Questions[i].OptionC</option>
-                            <option value="4">@Model.Questions[i].OptionD</option>
-                            <option value="5">@Model.Questions[i].OptionE</option>
-                        </select>
+                <div class="card border-success mt-2">
+                    <div class="card-header text-warning"><strong>Soru 1</strong></div>
+                    <div class="card-body">
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="questionId1" id="questionList1" class="form-control" asp-items="ViewBag.Questions"
+                                    onchange="LoadAnswers(this,'answerList1');"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="answerId1" id="answerList1" class="form-control" asp-items="ViewBag.Answers"></select>
+                        </div>
                     </div>
-                }
-
+                </div>
+                <div class="card border-success mt-2">
+                    <div class="card-header text-warning"><strong>Soru 2</strong></div>
+                    <div class="card-body">
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="questionId2" id="questionList2" class="form-control" asp-items="ViewBag.Questions"
+                                    onchange="LoadAnswers(this,'answerList2');"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="answerId2" id="answerList2" class="form-control" asp-items="ViewBag.Answers"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-success mt-2">
+                    <div class="card-header text-warning"><strong>Soru 3</strong></div>
+                    <div class="card-body">
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="questionId3" id="questionList3" class="form-control" asp-items="ViewBag.Questions"
+                                    onchange="LoadAnswers(this,'answerList3');"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="answerId3" id="answerList3" class="form-control" asp-items="ViewBag.Answers"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-success mt-2">
+                    <div class="card-header text-warning"><strong>Soru 4</strong></div>
+                    <div class="card-body">
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="questionId4" id="questionList4" class="form-control" asp-items="ViewBag.Questions"
+                                    onchange="LoadAnswers(this,'answerList4');"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="answerId4" id="answerList4" class="form-control" asp-items="ViewBag.Answers"></select>
+                        </div>
+                    </div>
+                </div>
                 <div class="w-75 btn-group pt-3" role="group">
-                    <button class="btn btn-primary" type="submit">Anket'i tamamla</button>
+                    <button class="btn btn-success" type="submit"><i class="bi bi-caret-right-square"></i> Anketi oluştur</button>
 
-                    <a asp-area="Customer" asp-controller="HomeController" asp-action="Index" class="btn btn-danger mx-2">
-                        <i class="bi bi-trash3-fill"></i> Ana Sayfa
+                    <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-info">
+                        <i class="bi bi-house-door"></i> Ana Sayfa
                     </a>
                 </div>
                 

@@ -8,44 +8,68 @@
             </h2>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="" asp-action="Create" class="btn btn-primary">
+            <a  asp-controller="Question"
+                asp-action="Create" class="btn btn-primary"
+                asp-route-id="@TempData["quizId"]">
                 <i class="bi bi-plus-circle"></i> Yeni Soru Oluştur
             </a>
         </div>
     </div>
 
+    
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Soru</th>
-                <th>Seçenek A</th>
-                <th>Seçenek B</th>
-                <th>Seçenek C</th>
-                <th>Seçenek D</th>
-                <th>Seçenek E</th>
-                <th>Doğru Seçenek</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
+    @if(Model.Count > 0)
+    {
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
                 <tr>
-                    <td>@obj.QuestionID</td>
-                    <td>@obj.QuestionText</td>
-                    <td>@obj.OptionA</td>
-                    <td>@obj.OptionB</td>
-                    <td>@obj.OptionC</td>
-                    <td>@obj.OptionD</td>
-                    <td>@obj.OptionE</td>
-                    <td>@obj.CorrectAnswer</td>
-                    <td></td
+                    <th>Question ID</th>
+                    <th>Quiz ID</th>
+                    <th>Soru</th>
+                    <th>Seçenek A</th>
+                    <th>Seçenek B</th>
+                    <th>Seçenek C</th>
+                    <th>Seçenek D</th>
+                    <th>Seçenek E</th>
+                    <th></th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.QuestionID</td>
+                        <td>@obj.QuizID</td>
+                        <td>@obj.QuestionText</td>
+                        <td>@obj.OptionA</td>
+                        <td>@obj.OptionB</td>
+                        <td>@obj.OptionC</td>
+                        <td>@obj.OptionD</td>
+                        <td>@obj.OptionE</td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-warning" asp-action="Update" asp-route-id="@obj.QuestionID">
+                                    <i class="bi bi-pen"></i> Güncelle
+                                </a>
+                                <a onClick=Delete('/admin/question/delete/?id =@obj.QuestionID') class="btn btn-danger mx-2">
+                                    <i class="bi bi-trash"></i> Sil
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
 
-        </tbody>
+            </tbody>
 
-    </table>
+        </table>
+    }
+    else
+    {
+        <div class="text-center">
+            <p>İlgili ankete ait soru bulunamadı.</p>
+        </div>
+    }
+
+    
 
 </div>

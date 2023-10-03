@@ -26,23 +26,22 @@ namespace DataAccess.Repository
 
         public T Get(Expression<Func<T, bool>> predicate,bool trackChanges ,string includeProperties = "")
         {
-            var entity = _dbContext.Set<T>();
-            entity.Where(predicate);
+            IQueryable<T> entity = _dbContext.Set<T>();
             foreach(var item in includeProperties.Split(new char[] {',' }, StringSplitOptions.RemoveEmptyEntries)) 
             {
-                entity.Include(item);
+                entity = entity.Include(item);
             }
             return trackChanges
-            ? entity.SingleOrDefault()
-            : entity.AsNoTracking().SingleOrDefault();
+            ? entity.Where(predicate).SingleOrDefault()
+            : entity.Where(predicate).AsNoTracking().SingleOrDefault();
         }
 
         public IQueryable<T> GetAll(bool trackChanges, string includeProperties = "")
         {
-            var entities = _dbContext.Set<T>();
+            IQueryable<T> entities = _dbContext.Set<T>();
             foreach (var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                entities.Include(item);
+                entities = entities.Include(item);
             }
             return trackChanges
             ? entities

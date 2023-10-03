@@ -24,6 +24,16 @@ namespace Services
             _manager.Save();
         }
 
+        public void DecreaseVisitLimitByOne(Guid id)
+        {
+            Quiz? quiz = _manager.Quiz.GetOneQuiz(id, true);
+            if (quiz != null)
+            {
+                quiz.VisitLimit -= 1;
+                _manager.Save();
+            }
+        }
+
         public void DeleteOneQuiz(Guid id)
         {
             Quiz? quiz = _manager.Quiz.GetOneQuiz(id, false);
@@ -41,7 +51,7 @@ namespace Services
 
         public Quiz? GetOneQuiz(Guid id, bool trackChanges, string includeProperties = "")
         {
-            Quiz? quiz = _manager.Quiz.GetOneQuiz(id, false);
+            Quiz? quiz = _manager.Quiz.GetOneQuiz(id, false,includeProperties);
             if (quiz is null)
                 throw new Exception($"Quiz with {id} not found");
 

@@ -14,5 +14,6 @@ namespace Services.Contracts
         void CreateOneQuiz(Quiz quiz);
         void UpdateOneQuiz(Quiz quiz);
         void DeleteOneQuiz(Guid id);
+        void DecreaseVisitLimitByOne(Guid id);
     }
 }

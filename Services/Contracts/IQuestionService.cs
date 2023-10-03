@@ -11,6 +11,7 @@ namespace Services.Contracts
     {
         IEnumerable<Question> GetAllQuestions(bool trackChanges, string includeProperties = "");
         Question? GetOneQuestion(int id, bool trackChanges, string includeProperties = "");
+        List<string> GetQuestionAnswersById(int questionId);
         void CreateOneQuestion(Question question);
         void UpdateOneQuestion(Question question);
         void DeleteOneQuestion(int id);

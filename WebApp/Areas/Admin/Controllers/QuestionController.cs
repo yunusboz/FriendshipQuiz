@@ -6,6 +6,7 @@ using DataAccess.Contexts;
 using DataAccess.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Utility.Constants;
+using Services.Contracts;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -13,41 +14,54 @@ namespace WebApp.Areas.Admin.Controllers
     [Authorize(Roles = Roles.Admin)]
     public class QuestionController : Controller
     {
-        private readonly IRepositoryManager _unitOfWork;
+        private readonly IServiceManager _manager;
 
-        public QuestionController(IRepositoryManager unitOfWork)
+        public QuestionController(IServiceManager manager)
         {
-            _unitOfWork = unitOfWork;
+            _manager = manager;
         }
 
         public IActionResult Index()
         {
-            //var questions = _unitOfWork.Question.GetAll().ToList();
-            var questions2 = _unitOfWork.Question.GetAll().Include(q => q.Quiz).ToList();
-            return View(questions2);
+            var questions = _manager.QuestionService
+                .GetAllQuestions(trackChanges: false, includeProperties: "Quiz").ToList();
+            return View(questions);
         }
 
         public IActionResult GetQuestions(Guid id)
         {
-            List<Question> questionsOfQuiz = _unitOfWork.Question
-                .GetQuestionsById(q => q.QuizID == id)
+            List<Question> quizQuestions = _manager.QuestionService
+                .GetAllQuestions(false)
+                .Where(q => q.QuizID.Equals(id))
                 .ToList();
-            return View(questionsOfQuiz);
+            TempData["quizId"] = id;
+            return View(quizQuestions);
         }
 
-        public IActionResult Create()
+        public IActionResult Create([FromRoute] Guid id)
         {
-            return View();
+            return View(new Question() { QuizID = id});
         }
 
-        //[HttpPost]
-        //public IActionResult Create([FromForm] Question question)
-        //{
-        //    var id = TempData["quizId"].ToString();
-        //    question.QuizID = int.Parse(id);
-        //    _unitOfWork.Question.Add(question);
-        //    _unitOfWork.Save();
-        //    return RedirectToAction("Index", "Quiz");
-        //}
+        [HttpPost]
+        public IActionResult Create([FromForm] Question question)
+        {
+            _manager.QuestionService.CreateOneQuestion(question);
+            return RedirectToAction(nameof(GetQuestions), new { id = question.QuizID });
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var questionToBeDeleted = _manager.QuestionService.GetOneQuestion(id, false);
+            if(questionToBeDeleted == null)
+            {
+                return Json(new { success = false, message = "Silerken bir hata oluştu. Tekrar deneyiniz." });
+            }
+
+            _manager.QuestionService.DeleteOneQuestion(id);
+
+            return Json(new { success = true, message = "Silme işlemi başarılı." });
+        }
     }
 }

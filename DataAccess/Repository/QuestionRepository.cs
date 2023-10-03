@@ -25,7 +25,7 @@ namespace DataAccess.Repository
 
         public Question? GetOneQuestion(int id, bool trackChanges, string includeProperties = "")
         {
-            return Get(q => q.QuestionID.Equals(id), trackChanges, includeProperties);
+            return Get(q => q.QuestionID == id, trackChanges, includeProperties);
         }
 
         public void UpdateOneQuestion(Question question) => Update(question);

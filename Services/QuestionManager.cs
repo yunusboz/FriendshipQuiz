@@ -48,6 +48,20 @@ namespace Services
             return question;
         }
 
+        public List<string> GetQuestionAnswersById(int questionId)
+        {
+            var entity = _manager.Question.Get(q => q.QuestionID.Equals(questionId),false);
+            List<string> answers = new List<string>()
+            {
+                entity.OptionA,
+                entity.OptionB,
+                entity.OptionC,
+                entity.OptionD,
+                entity.OptionE
+            };
+            return answers;
+        }
+
         public void UpdateOneQuestion(Question question)
         {
             _manager.Question.Update(question);

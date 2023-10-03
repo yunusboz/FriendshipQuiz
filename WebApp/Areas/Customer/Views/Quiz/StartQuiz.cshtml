@@ -4,36 +4,30 @@
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="py-2">Arkadaşınız aşağıdaki quizi oluşturdu</h2>
-                <h4 class="py-2">Quiz'i çözerek kendisini ne kadar tanıdığınızı görebilirsiniz</h4>
+                <h2 class="py-2">@Model.CreatedBy aşağıdaki anketi oluşturdu</h2>
+                <h4 class="py-2">Anketin Adı: @Model.SurveyName</h4>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
         <form method="post">
+            <div class="text-danger" asp-validation-summary="All"></div>
             <div class="border p-3">
-                
-                <label class="pt-3">Quiz @Model.Name</label> <br />
-                <label class="pt-3">Oluşturan: @Model.CreatedBy</label>
+                <input asp-for="QuizId" type="hidden" />
 
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="@Model.QuizResult.Name" class="form-control border-0 shadow" />
-                    <label class="ms-2">İsminiz</label>
-                    <span asp-validation-for="@Model.QuizResult.Name" class="text-danger"></span>
+                    <input asp-for="Name" class="form-control border-0 shadow" placeholder="Adınızı giriniz" />
+                    <label class="ms-2">Adınız</label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
                 @for (var i = 0; i < Model.Questions.Count(); i++)
                 {
-                    <div class="form-floating py-2 col-12">
-                        <input type="hidden" asp-for="@Model.Questions[i].OptionA" />
-                        <input type="hidden" asp-for="@Model.Questions[i].OptionB" />
-                        <input type="hidden" asp-for="@Model.Questions[i].OptionC" />
-                        <input type="hidden" asp-for="@Model.Questions[i].OptionD" />
-                        <input type="hidden" asp-for="@Model.Questions[i].OptionE" />
-                        <input type="hidden" asp-for="@Model.Questions[i].QuestionText" />
 
-                        <label>@Model.Questions[i].QuestionText</label>
-                        <select asp-for="@Model.Questions[i].SelectedAnswer" class="form-control">
+                    <div class="form-floating py-2 col-12">
+                        <label class="form-label mt-4">@Model.Questions[i].QuestionText</label>
+                        <br/>
+                        <select asp-for="SelectedOptions[i]" class="form-control">
                             <option value="1">@Model.Questions[i].OptionA</option>
                             <option value="2">@Model.Questions[i].OptionB</option>
                             <option value="3">@Model.Questions[i].OptionC</option>
@@ -44,7 +38,7 @@
                 }
 
                 <div class="w-75 btn-group pt-3" role="group">
-                    <button class="btn btn-primary" type="submit">Quiz'i tamamla</button>
+                    <button class="btn btn-primary" type="submit">Anketi tamamla</button>
                 </div>
 
             </div>

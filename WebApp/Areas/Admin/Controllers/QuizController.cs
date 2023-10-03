@@ -7,6 +7,7 @@ using Entities.ViewModels;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Utility.Constants;
+using Services.Contracts;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -14,16 +15,18 @@ namespace WebApp.Areas.Admin.Controllers
     [Authorize(Roles = Roles.Admin)]
     public class QuizController : Controller
     {
-        private readonly IRepositoryManager _unitOfWork;
+        private readonly IServiceManager _manager;
 
-        public QuizController(IRepositoryManager unitOfWork)
+        public QuizController(IServiceManager manager)
         {
-            _unitOfWork = unitOfWork;
+            _manager = manager;
         }
 
         public IActionResult Index()
         {
-            List<Quiz> quizzes = _unitOfWork.Quiz.GetAll().Include(q => q.Questions).ToList();
+            List<Quiz> quizzes = _manager.QuizService
+                .GetAllQuiz(trackChanges: false, includeProperties: "Questions")
+                .ToList();
             return View(quizzes);
         }
 
@@ -41,8 +44,7 @@ namespace WebApp.Areas.Admin.Controllers
                 CreatedBy = quizViewModel.Quiz.CreatedBy
             };
             quiz.Questions.Add(quizViewModel.Question);
-            _unitOfWork.Quiz.Add(quiz);
-            _unitOfWork.Save();
+            _manager.QuizService.CreateOneQuiz(quiz);
             return RedirectToAction("Index");
             /*TempData["quizId"] = quiz.QuizID;
             return RedirectToAction("Create", "Question");*/
