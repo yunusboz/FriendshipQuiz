@@ -63,6 +63,7 @@ namespace WebApp.Areas.Customer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult StartQuiz(ShowQuizViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -113,6 +114,7 @@ namespace WebApp.Areas.Customer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create([FromForm] CreateQuizViewModel quizVM)
         {
             Question question1 = _manager.QuestionService.GetOneQuestion(quizVM.questionId1,false);
@@ -137,8 +139,7 @@ namespace WebApp.Areas.Customer.Controllers
                     Questions = questions
                 };
                 _manager.QuizService.CreateOneQuiz(quiz);
-                string createdQuizId = quiz.QuizID.ToString();
-                return RedirectToAction(nameof(ShowLink), new { id = createdQuizId });
+                return RedirectToAction(nameof(ShowLink), new { id =  quiz.QuizID.ToString()});
             }
             return View();
         }

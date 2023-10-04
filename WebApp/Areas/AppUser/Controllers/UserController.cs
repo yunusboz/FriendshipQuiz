@@ -26,5 +26,11 @@ namespace WebApp.Areas.AppUser.Controllers
             TempData["Name"] = appUser.FirstName + " " +appUser.LastName;
             return View();
         }
+
+        public IActionResult ScoreTable(Guid id)
+        {
+            List<QuizResult> quizResult = _manager.QuizService.GetOneQuiz(id, false, "QuizResults").QuizResults.ToList();
+            return View(quizResult);
+        }
     }
 }

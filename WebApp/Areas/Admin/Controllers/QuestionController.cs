@@ -7,6 +7,7 @@ using DataAccess.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Utility.Constants;
 using Services.Contracts;
+using Entities.ViewModels;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -40,12 +41,22 @@ namespace WebApp.Areas.Admin.Controllers
 
         public IActionResult Create([FromRoute] Guid id)
         {
-            return View(new Question() { QuizID = id});
+            return View(new QuestionViewModel() { QuizId = id});
         }
 
         [HttpPost]
-        public IActionResult Create([FromForm] Question question)
+        public IActionResult Create([FromForm] QuestionViewModel qvm)
         {
+            Question question = new Question()
+            {
+                QuizID = qvm.QuizId,
+                QuestionText = qvm.QuestionText,
+                OptionA = qvm.OptionA,
+                OptionB = qvm.OptionB,
+                OptionC = qvm.OptionC,
+                OptionD = qvm.OptionD,
+                OptionE = qvm.OptionE
+            };
             _manager.QuestionService.CreateOneQuestion(question);
             return RedirectToAction(nameof(GetQuestions), new { id = question.QuizID });
         }

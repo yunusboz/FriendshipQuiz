@@ -11,6 +11,7 @@ namespace Entities.ViewModels
 {
     public class QuestionViewModel
     {
+        public Guid QuizId { get; set; }
 
         [Required]
         [DisplayName("Soru")]

@@ -28,7 +28,6 @@ namespace Entities.ViewModels
 
         [ValidateNever]
         public List<Question> Questions { get; set; }
-
-        public List<int> SelectedOptions { get; set; } = new List<int>() { 0, 1, 2, 3 };
+        public IList<int> SelectedOptions { get; set; }
     }
 }

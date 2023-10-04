@@ -1,7 +1,7 @@
 ﻿
 
 <div class="text center">
-    <h2>Arkadaşlık anketine @TempData["Name"] hoşgeldiniz!</h2>
+    <h2>@TempData["Name"] arkadaşlık anketine hoşgeldiniz!</h2>
     <p>Aşağıdaki butona tıklayarak arkadaşınıza anket oluşturabilir, sizi ne kadar tanıdığını ölçebilirsiniz.</p>
     <a class="btn btn-primary" asp-controller="Quiz" asp-action="Create" asp-route-name="@TempData["Name"]">Anket Oluştur</a>
 </div>

@@ -10,6 +10,6 @@ namespace Entities.ViewModels
     public class QuizViewModel
     {
         public Quiz Quiz { get; set; }
-        public Question Question { get; set; }
+        public QuestionViewModel Question { get; set; }
     }
 }

@@ -21,9 +21,5 @@
     <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\Utility\Utility.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\AppUser\Data\" />
-    <Folder Include="Areas\AppUser\Models\" />
-  </ItemGroup>
 
 </Project>

@@ -15,7 +15,7 @@ namespace Entities.ViewModels
         [Required]
         [MinLength(3)]
         [MaxLength(30)]
-        [DisplayName("Quiz Adı")]
+        [DisplayName("Anket Adı")]
         public string Name { get; set; }
         [Required]
         [DisplayName("İsim")]

@@ -38,18 +38,27 @@ namespace WebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(QuizViewModel quizViewModel)
         {
-            Quiz quiz = new Quiz()
+            if (ModelState.IsValid)
             {
-                Name = quizViewModel.Quiz.Name,
-                CreatedBy = quizViewModel.Quiz.CreatedBy
-            };
-            quiz.Questions.Add(quizViewModel.Question);
-            _manager.QuizService.CreateOneQuiz(quiz);
-            return RedirectToAction("Index");
-            /*TempData["quizId"] = quiz.QuizID;
-            return RedirectToAction("Create", "Question");*/
-
-            //return View("Question/Create", quiz.QuizID);
+                Question question = new Question()
+                {
+                    QuestionText = quizViewModel.Question.QuestionText,
+                    OptionA = quizViewModel.Question.OptionA,
+                    OptionB = quizViewModel.Question.OptionB,
+                    OptionC = quizViewModel.Question.OptionC,
+                    OptionD = quizViewModel.Question.OptionD,
+                    OptionE = quizViewModel.Question.OptionE
+                };
+                Quiz quiz = new Quiz()
+                {
+                    Name = quizViewModel.Quiz.Name,
+                    CreatedBy = quizViewModel.Quiz.CreatedBy
+                };
+                quiz.Questions.Add(question);
+                _manager.QuizService.CreateOneQuiz(quiz);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
     }

@@ -8,39 +8,31 @@
             </div>
         </div>
     </div>
-    <div class="card-body p-4">
-        <div class="row pb-3">
-            <div class="col-6">
-            </div>
-            <div class="col-6 text-end">
-                <a asp-controller="Quiz" asp-action="Create" class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i> Yeni Anket Oluştur
-                </a>
-            </div>
-        </div>
 
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Anket Adı</th>
-                    <th>Oluşturan</th>
                     <th>Oluşturma Tarihi</th>
                     <th>Sorular</th>
+                    <th>Skor Tablosu</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td>@obj.QuizID</td>
                         <td>@obj.Name</td>
-                        <td>@obj.CreatedBy</td>
                         <td>@obj.CreatedDate</td>
                         <td>
-                            <a asp-controller="Question" asp-action="GetQuestions" asp-route-id="@obj.QuizID" class="btn btn-info">
+                            <a asp-controller="Quiz" asp-action="GetQuestionsById" asp-route-id="@obj.QuizID" class="btn btn-info">
                                 Soruları Görüntüle
-                            </a>
+                            </a>                            
+                        </td>
+                        <td>
+                        <a asp-controller="User" asp-action="ScoreTable" asp-route-id="@obj.QuizID" class="btn btn-primary">
+                            Skor Tablosunu Görüntüle
+                        </a>
                         </td>
                     </tr>
                 }

@@ -25,12 +25,7 @@
                 </div>
                 @for(int i = 0; i < 10; i++)
                 {
-                    <input type="hidden" asp-for="@Model.Questions[i].QuestionText" />
-                    <input type="hidden" asp-for="@Model.Questions[i].OptionA" />
-                    <input type="hidden" asp-for="@Model.Questions[i].OptionB" />
-                    <input type="hidden" asp-for="@Model.Questions[i].OptionC" />
-                    <input type="hidden" asp-for="@Model.Questions[i].OptionD" />
-                    <input type="hidden" asp-for="@Model.Questions[i].OptionE" />
+                    
                     <div class="card border-success mt-2">
                         <div class="card-header text-warning"><strong>Soru @(i + 1)</strong></div>
                         <div class="card-body">
@@ -40,9 +35,8 @@
                                         <option disabled selected>Soru Seçiniz</option>
                                     </select>
                             </div>
-                            <div class="form-floating py-2 col-12">
+                            <div class="form-floating py-2 col-12"> 
                                 <select asp-for="Questions[i].CorrectAnswer" id=@($"answerList{i}") class="form-control" asp-items="ViewBag.Answers">
-                                    <option disabled selected>Cevabı Seçiniz</option>
                                 </select>
                             </div>
                         </div>

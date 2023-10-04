@@ -1,4 +1,4 @@
-﻿@model Question
+﻿@model QuestionViewModel
 
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
@@ -14,7 +14,7 @@
                 <section>
                     <form method="post">
                         <div class="border p-3">
-                            <input asp-for="QuizID" hidden />
+                            <input asp-for="QuizId" hidden />
                             @*<div asp-validation-summary="ModelOnly"></div>*@
                             <div class="form-floating mb-3">
                                 <input asp-for="QuestionText" class="form-control" />
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-6 col-md-3">
                                     <a asp-controller="Quiz" asp-action="Index" class="btn btn-outline-primary border form-control">
-                                        Quizler
+                                        Anketler
                                     </a>
                                 </div>
                             </div>
@@ -67,5 +67,8 @@
     </div>
 </div>
 
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
 
 
