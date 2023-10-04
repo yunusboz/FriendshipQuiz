@@ -117,21 +117,24 @@ namespace WebApp.Areas.Customer.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([FromForm] CreateQuizViewModel quizVM)
         {
-            Question question1 = _manager.QuestionService.GetOneQuestion(quizVM.questionId1,false);
-            Question question2 = _manager.QuestionService.GetOneQuestion(quizVM.questionId2,false);
-            Question question3 = _manager.QuestionService.GetOneQuestion(quizVM.questionId3,false);
-            Question question4 = _manager.QuestionService.GetOneQuestion(quizVM.questionId4,false);
-            question1.QuestionID = 0;
-            question1.CorrectAnswer = quizVM.answerId1;
-            question2.QuestionID = 0;
-            question2.CorrectAnswer = quizVM.answerId2;
-            question3.QuestionID = 0;
-            question3.CorrectAnswer = quizVM.answerId3;
-            question4.QuestionID = 0;
-            question4.CorrectAnswer = quizVM.answerId4;
-            List<Question> questions = new List<Question> { question1, question2, question3, question4 };
-            if (ModelState.IsValid)
-            {
+            List<Question> questions = new List<Question>();
+            foreach (var item in quizVM.Questions)
+                {
+                    Question entity =
+                        _manager.QuestionService
+                        .GetOneQuestion(int.Parse(item.QuestionText), false);
+                    Question question = new Question()
+                    {
+                        QuestionText = entity.QuestionText,
+                        OptionA = entity.OptionA,
+                        OptionB = entity.OptionB,
+                        OptionC = entity.OptionC,
+                        OptionD = entity.OptionD,
+                        OptionE = entity.OptionE,
+                        CorrectAnswer = item.CorrectAnswer
+                    };
+                    questions.Add(question);
+                }
                 Quiz quiz = new Quiz()
                 {
                     Name = quizVM.Name,
@@ -140,7 +143,7 @@ namespace WebApp.Areas.Customer.Controllers
                 };
                 _manager.QuizService.CreateOneQuiz(quiz);
                 return RedirectToAction(nameof(ShowLink), new { id =  quiz.QuizID.ToString()});
-            }
+            
             return View();
         }
 
@@ -189,15 +192,6 @@ namespace WebApp.Areas.Customer.Controllers
                 Value = q.QuestionID.ToString(),
                 Text = q.QuestionText
             }).ToList();
-
-            var defaultQuestion = new SelectListItem()
-            {
-                Value = "",
-                Text = "Soru Seçin"
-            };
-
-            questionsList.Insert(0,defaultQuestion);
-
             return questionsList;
         }
 
