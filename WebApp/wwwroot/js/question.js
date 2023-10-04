@@ -17,8 +17,12 @@ function Delete(url) {
                 type: 'DELETE',
                 success: function (data) {
                     Swal.fire(
-                        (data.message)
-                    )
+                        (data.message))
+                        .then(okay => {
+                            if (okay) {
+                                location.reload();
+                            }
+                        });                    
                 }
             })
         }

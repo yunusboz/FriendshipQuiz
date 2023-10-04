@@ -20,7 +20,7 @@ namespace Services
 
         public void CreateOneQuiz(Quiz quiz)
         {
-            _manager.Quiz.Add(quiz);
+            _manager.Quiz.CreateOneQuiz(quiz);
             _manager.Save();
         }
 

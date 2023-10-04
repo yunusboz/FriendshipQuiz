@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.IRepository
 {
-    public interface IRepository<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         IQueryable<T> GetAll(bool trackChanges, string includeProperties = "");
         T Get(Expression<Func<T, bool>> predicate,bool trackChanges ,string includeProperties = "");

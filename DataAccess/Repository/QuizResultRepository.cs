@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class QuizResultRepository : Repository<QuizResult>, IQuizResultRepository
+    public class QuizResultRepository : GenericRepository<QuizResult>, IQuizResultRepository
     {
         public QuizResultRepository(BaseDbContext dbContext) : base(dbContext)
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.IRepository
 {
-    public interface IQuestionRepository : IRepository<Question>
+    public interface IQuestionRepository : IGenericRepository<Question>
     {
         IQueryable<Question> GetAllQuestions(bool trackChanges, string includeProperties = "");
         Question? GetOneQuestion(int id, bool trackChanges, string includeProperties = "");

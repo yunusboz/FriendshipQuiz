@@ -21,6 +21,7 @@ namespace DataAccess.Extensions
             services.AddScoped<IQuizRepository, QuizRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IQuizResultRepository, QuizResultRepository>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             return services;
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.IRepository
 {
-    public interface IQuizResultRepository : IRepository<QuizResult>
+    public interface IQuizResultRepository : IGenericRepository<QuizResult>
     {
         IQueryable<QuizResult> GetAllQuizResults(bool trackChanges, string includeProperties = "");
         QuizResult? GetOneQuizResult(int id, bool trackChanges, string includeProperties = "");

@@ -20,7 +20,7 @@ namespace Services
 
         public void CreateOneQuestion(Question question)
         {
-            _manager.Question.Add(question);
+            _manager.Question.CreateOneQuestion(question);
             _manager.Save();
         }
 
@@ -29,7 +29,7 @@ namespace Services
             Question? question = _manager.Question.GetOneQuestion(id, false);
             if(question is not null)
             {
-                _manager.Question.Remove(question);
+                _manager.Question.DeleteOneQuestion(question);
                 _manager.Save();
             }
         }

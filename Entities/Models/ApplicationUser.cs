@@ -14,5 +14,6 @@ namespace Entities.Models
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        public ICollection<Quiz> Quizzes { get; set; } = new HashSet<Quiz>();
     }
 }

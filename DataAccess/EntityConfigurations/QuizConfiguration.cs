@@ -15,9 +15,12 @@ namespace DataAccess.EntityConfigurations
         {
             builder.HasKey(q => q.QuizID);
 
-            builder.Property(q => q.Name).IsRequired().HasMaxLength(30);
+            builder.Property(q => q.Name).IsRequired().HasMaxLength(80);
             builder.HasMany(q => q.Questions);
             builder.HasMany(q => q.QuizResults);
+            builder.HasOne(q => q.ApplicationUser)
+                .WithMany(a => a.Quizzes)
+                .HasForeignKey(a => a.AppUserId);
 
             builder.HasData(new Quiz() 
             { 

@@ -13,17 +13,49 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-body-tertiary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApp</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Anket</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        
+                        @{
+                            if (User.IsInRole(Roles.User))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link active" asp-area="AppUser" asp-controller="User" asp-action="Index">
+                                    Ana sayfa
+                                        <span class="visually-hidden">(current)</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Anketler</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" asp-area="AppUser" asp-controller="User" asp-action="Create">
+                                            Anket oluştur
+                                        </a>
+                                        <a class="dropdown-item" asp-area="AppUser" asp-controller="User" asp-action="Create">
+                                            Anketlerim
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="nav item">
+                                    <a class="nav-link text-dark" asp-area="AppUser" asp-controller="User" asp-action="Score">Skor tablosu</a>
+                                </li>
+                            }
+                            else if (User.IsInRole(Roles.Admin))
+                            {
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Quiz" asp-action="Index">Ana sayfa</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+
+                            }
+                        }
+
                         @if (User.IsInRole(Roles.Admin))
                         {
                             <li class="nav-item dropdown">

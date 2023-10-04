@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Utility.Constants;
 using WebApp.Models;
 
 namespace WebApp.Areas.Customer.Controllers
@@ -16,7 +17,21 @@ namespace WebApp.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole(Roles.Admin))
+                {
+                    return RedirectToAction("Index","Quiz", new {area = Roles.Admin});
+                }
+                else
+                {
+                    return RedirectToAction("Index", "User", new { area = "AppUser" });
+                }
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()

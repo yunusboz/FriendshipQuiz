@@ -11,6 +11,7 @@ namespace DataAccess.IRepository
         IQuizRepository Quiz { get; }
         IQuestionRepository Question { get; }
         IQuizResultRepository QuizResult { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }

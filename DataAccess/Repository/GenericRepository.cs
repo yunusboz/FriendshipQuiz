@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly BaseDbContext _dbContext;
 
-        public Repository(BaseDbContext dbContext)
+        public GenericRepository(BaseDbContext dbContext)
         {
             _dbContext = dbContext;
         }

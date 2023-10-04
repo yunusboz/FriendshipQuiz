@@ -11,5 +11,6 @@ namespace Services.Contracts
         IQuizService QuizService { get; }
         IQuestionService QuestionService { get; }
         IQuizResultService QuizResultService { get; }
+        IApplicationUserService ApplicationUserService { get; }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class QuestionRepository : Repository<Question>, IQuestionRepository
+    public class QuestionRepository : GenericRepository<Question>, IQuestionRepository
     {
         public QuestionRepository(BaseDbContext dbContext) : base(dbContext)
         {
