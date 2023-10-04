@@ -43,11 +43,6 @@
                         <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Şifre Tekrar</label>
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
-                            <option disabled selected>Role seçiniz</option>
-                        </select>
-                    </div>
                     <div class="col-12">
                         <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Üye Ol</button>
                     </div>

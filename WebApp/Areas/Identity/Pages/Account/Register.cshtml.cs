@@ -107,8 +107,8 @@ namespace WebApp.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             public string? Role { get; set; }
-            [ValidateNever]
-            public IEnumerable<SelectListItem> RoleList { get; set; }
+            //[ValidateNever]
+            //public IEnumerable<SelectListItem> RoleList { get; set; }
 
             [Required(ErrorMessage = "{0} alanı zorunlu.")]
             [Display(Name = "Ad")]
@@ -131,15 +131,6 @@ namespace WebApp.Areas.Identity.Pages.Account
                 _roleManager.CreateAsync(new IdentityRole(Roles.User)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(Roles.Admin)).GetAwaiter().GetResult();
             }
-
-            Input = new()
-            {
-                RoleList = _roleManager.Roles.Select(a => a.Name).Select(b => new SelectListItem
-                {
-                    Text = b,
-                    Value = b
-                })
-            };
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -160,14 +151,9 @@ namespace WebApp.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (!String.IsNullOrEmpty(Input.Role))
-                    {
-                        await _userManager.AddToRoleAsync(user, Input.Role);
-                    }
-                    else
-                    {
-                        await _userManager.AddToRoleAsync(user, Roles.User);
-                    }
+
+                    await _userManager.AddToRoleAsync(user, Roles.User);
+
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
