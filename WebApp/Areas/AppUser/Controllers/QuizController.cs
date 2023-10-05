@@ -49,7 +49,7 @@ namespace WebApp.Areas.AppUser.Controllers
                 Quiz = new Quiz { CreatedBy = name }
             };
             ViewBag.Questions = GetQuestions();
-            ViewBag.Answers = GetAnswers();
+            ViewBag.Answers = GetAnswers(85);
             return View(vm);
         }
 
@@ -166,7 +166,7 @@ namespace WebApp.Areas.AppUser.Controllers
             return Json(answers);
         }
 
-        private List<SelectListItem> GetAnswers(int questionId = 1)
+        private List<SelectListItem> GetAnswers(int questionId)
         {
 
             var question = _manager.QuestionService.GetOneQuestion(questionId, false);
@@ -198,7 +198,7 @@ namespace WebApp.Areas.AppUser.Controllers
         private List<Question> GetQuestionPool()
         {
             var items = _manager.QuestionService.GetAllQuestions(false, "Quiz")
-                .Where(q => q.QuizID == Guid.Parse("EA8B887F-042D-4C56-A034-68845AA34099"))
+                .Where(q => q.QuizID == Guid.Parse("9a3eb07f-0246-462b-8065-9c4b77c72363"))
                 .ToList();
             return items;
         }
