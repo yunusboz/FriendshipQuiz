@@ -48,8 +48,9 @@ namespace WebApp.Areas.AppUser.Controllers
             {
                 Quiz = new Quiz { CreatedBy = name }
             };
+            var id = GetQuestionPool().Select(q => q.QuestionID).FirstOrDefault();
             ViewBag.Questions = GetQuestions();
-            ViewBag.Answers = GetAnswers(85);
+            ViewBag.Answers = GetAnswers(id);
             return View(vm);
         }
 
@@ -197,7 +198,7 @@ namespace WebApp.Areas.AppUser.Controllers
 
         private List<Question> GetQuestionPool()
         {
-            var items = _manager.QuestionService.GetAllQuestions(false, "Quiz")
+            List<Question> items = _manager.QuestionService.GetAllQuestions(false, "Quiz")
                 .Where(q => q.QuizID == Guid.Parse("9a3eb07f-0246-462b-8065-9c4b77c72363"))
                 .ToList();
             return items;

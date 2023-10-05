@@ -108,8 +108,9 @@ namespace WebApp.Areas.Customer.Controllers
                 CreatedBy = name,
                 Name = ""
             };
+            var id = GetQuestionPool().Select(q => q.QuestionID).FirstOrDefault();
             ViewBag.Questions = GetQuestions();
-            ViewBag.Answers = GetAnswers(85);
+            ViewBag.Answers = GetAnswers(id);
             return View(vm);
         }
 
